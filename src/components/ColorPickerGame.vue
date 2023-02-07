@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Color Picker Game</h1>
-    <div>
+    <div class="body" :style="{'background-color': background}">
       <div>{{ res }}</div>
     </div>
     <div class="buttons">
@@ -19,13 +19,14 @@ export default {
   setup() {
     const colors = ["green", "red", "blue", "purple"];
     let res = ref("Pick a color...");
+    let background = ref('');
     const match = (color) => {
       let { message, messageColor } = matchColor(color, colors);
-      console.log(messageColor)
+      background.value = messageColor
       res.value = message;
     };
-    return { res, match, colors };
-  },
+    return { res, match, colors, background };
+  }
 };
 </script>
 
@@ -35,11 +36,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80px;
+    min-height: 60px;
+    color: white;
+    background-color: black;
+    margin: 10px;
   }
-  .green {
-    background-color: green;
-  }
+  
   .buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
